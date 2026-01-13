@@ -4,7 +4,6 @@ public class Array1 {
 
         // Create Array
         int[] numbers = {3, 6, 9, 67, 69, 39, 79, 96, 99, 77};
-
         boolean found = false;
         int foundIndex = -1;
 
@@ -22,6 +21,12 @@ public class Array1 {
                 foundIndex = i;
                 break;
             }
+        }
+
+        // Display of Array
+        for (int i = 0; i < numbers.length; i++){
+            // Display Array
+            System.out.print(numbers[i] + " ");
         }
 
         // Display of Index
