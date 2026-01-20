@@ -18,10 +18,10 @@ public class Activity1 {
         System.out.println("These are the seats available:");
     }
 
-    //This Method shows the Seats in the Theater
+    //This Method shows the Seats inside the Theater
     public static void showSeats(){
         //Create Array
-        int[][] theaterRow = new int[1][8];
+        int[][] theaterRow = new int[5][8];
         theaterRow[0][0] = 1;
         theaterRow[0][1] = 2;
         theaterRow[0][2] = 3;
