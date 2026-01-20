@@ -9,6 +9,7 @@ public class Activity1 {
 
     }
 
+    //This Method welcomes the Users
     public static void welcomeUsers(){
         //Theater Greetings
         System.out.println("*******************************************");
@@ -17,6 +18,7 @@ public class Activity1 {
         System.out.println("These are the seats available:");
     }
 
+    //This Method shows the Seats in the Theater
     public static void showSeats(){
         //Create Array
         int[][] theaterRow = new int[1][8];
@@ -37,8 +39,7 @@ public class Activity1 {
         }
     }
 
-    public static void 
-
+    
     
 
     
