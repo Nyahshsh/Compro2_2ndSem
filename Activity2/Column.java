@@ -6,7 +6,9 @@ public class Column {
 
         //Problem 1
         //Declare 2D Array
+        int columnCount = 4;
         double[][] m = new double[3][4];
+        
 
         //User Input
         Scanner sc = new Scanner(System.in);
@@ -19,8 +21,9 @@ public class Column {
             }
         }
 
-
-        sumColumn(m, 0);
+        for (int cI = 0; cI < columnCount; cI++){
+            System.out.println("The Sum of the Elements at Column " + cI + " is " + sumColumn(m, columnCount));
+        }
     
 
         // //Problem 2
@@ -46,9 +49,7 @@ public class Column {
         //For Loop 
         for(int row = 0; row < m.length; row++){
             sum = (double) (sum + m[row][columnIndex]);
-            System.out.println("The Sum of the Elements at Column " + columnIndex + " is " + sum);
         }
-        
         return sum;
     }
 
