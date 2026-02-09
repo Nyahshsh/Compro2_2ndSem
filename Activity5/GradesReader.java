@@ -1,11 +1,12 @@
-package Activity4;
+package Activity5;
 
-import java.util.*;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedWriter;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public class Grades {
+public class GradesReader {
     static String[] subjects;
     static Double[][] grades;
 
@@ -14,15 +15,17 @@ public class Grades {
         grades = new Double[50][3];
 
         System.out.println("={MAIN MENU}=");
+        System.out.println("[1] Add Grade for Subject\n[2] Display Grades\n[3] Exit\n");
         Scanner sx = new Scanner(System.in);
-        System.out.println("[1] Add Grade for Subject\n [2] Exit");
+        System.out.print("Enter Choice: ");
         int input = sx.nextInt();
 
         switch(input){
             case 1:
         }
 
-        try (Scanner sc = new Scanner(System.in)) {
+        do {
+            try (Scanner sc = new Scanner(System.in)) {
             for (int r = 0; r < 3; r++) {
                 System.out.print("Enter Subject: ");
                 subjects[r] = sc.nextLine();
@@ -53,6 +56,10 @@ public class Grades {
             }
             writeGrade();
         }
+
+        }while(input == 1);
+
+        
     }
 
     public static void writeGrade() {
@@ -80,3 +87,4 @@ public class Grades {
         System.out.println(sb.toString());
     }
 }
+
