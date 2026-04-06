@@ -73,7 +73,7 @@ public class GameSession {
     }
 }
 
-    // determine the winner aftr 10 rounds
+    // determine the winner aftr 3 rounds
     public String determineOverallWinner() {
         if (p1Score > p2Score) {
             p1.incrementWins();

@@ -14,10 +14,10 @@ import com.midterm_lab.service.UserService;
 
 public class Server {
     public static void main(String[] args) {
-        int port = 7777;
+        int port = 8888;
         UserService.loadFromJson();
 
-        System.out.println("Waiting for Players");
+        System.out.println("\nWaiting for Players...");
 
         try (ServerSocket server = new ServerSocket(port)) {
 
@@ -60,10 +60,10 @@ public class Server {
                     out1.println(p1.getUsername() + " VS " + p2.getUsername());
                     out2.println(p1.getUsername() + " VS " + p2.getUsername());
 
-                    // 10 rounds
-                    for (int i = 1; i <= 10; i++) {
-                        out1.println("Round: " + i + "/10");
-                        out2.println("Round: " + i + "/10");
+                    // 3 rounds
+                    for (int i = 1; i <= 3; i++) {
+                        out1.println("Round: " + i + "/3");
+                        out2.println("Round: " + i + "/3");
 
                         String p1move = in1.readLine();
                         String p2move = in2.readLine();
@@ -71,8 +71,11 @@ public class Server {
                         session.setP2move(GameService.getMove(p2move));
 
                         String roundResult = session.playRound();
-                        out1.println(roundResult);
-                        out2.println(roundResult);
+                        String[] parts = roundResult.split("\n");
+                        out1.println(parts[0]); // 
+                        out2.println(parts[0]);
+                        out1.println(parts[1]); // 
+                        out2.println(parts[1]);
                         out1.println("END");
                         out2.println("END");
                     }

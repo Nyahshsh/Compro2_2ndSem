@@ -15,7 +15,7 @@ public class UserService {
     //list of all players loeaded from Players.json
     public static ArrayList<Player> players = new ArrayList<>();
     //path to json file
-    public static final String filename = "C:\\Users\\figue\\PRACODES-JAVA\\midterms\\data\\Players.json";
+    public static final String filename = "src/main/resources/Players.json";
 
     //verifies credentials
     public static String login(String username, String password) {

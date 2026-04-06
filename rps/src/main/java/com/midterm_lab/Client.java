@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         String server = "localhost";
-        int port = 7777;
+        int port = 8888;
         try (Socket socket = new Socket(server, port);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -24,7 +24,7 @@ public class Client {
             while (true) {
                 System.out.println("""
                         ===================================
-                                  WELCOME TO NYAH'S 
+                                  WELCOME TO NYAH'S
                             ROCK - PAPER - SCISSORS GAME
                         ===================================
                                  [1] Log in
@@ -89,10 +89,15 @@ public class Client {
                     }
                     out.println(p2ready);
 
-                    // Read Player 1 action from server
-                    String actionLine = in.readLine();
-                    if (actionLine != null && actionLine.contains(":")) {
-                        actionChoice = actionLine.split(":")[1].trim();
+                    if (p2ready.equalsIgnoreCase("quit")) {
+                        actionChoice = "2";
+                    } else {
+                        String actionLine = in.readLine();
+                        if (actionLine != null && actionLine.contains(":")) {
+                            actionChoice = actionLine.split(":")[1].trim();
+                        } else {
+                            actionChoice = "1"; // play na?
+                        }
                     }
                 }
 
@@ -104,7 +109,7 @@ public class Client {
 
                     String roundHeader;
                     while ((roundHeader = in.readLine()) != null && !roundHeader.equals("GAME_OVER")) {
-                        System.out.println("\n" + roundHeader); // "Round X/10"
+                        System.out.println("\n" + roundHeader); // "Round X/3"
                         System.out.println("=========== CHOOSE YOUR PICK ===========");
                         System.out.println("  [0] Rock   [1] Paper   [2] Scissors");
 
@@ -118,8 +123,8 @@ public class Client {
                         }
                         out.println(move);
 
-                        String picks = in.readLine(); //"Player 1 picked Rock | Player 2 picked Paper"
-                        String winner = in.readLine(); //"Result: Player 2 wins this round"
+                        String picks = in.readLine(); // "Player 1 picked Rock | Player 2 picked Paper"
+                        String winner = in.readLine(); // "Result: Player 2 wins this round"
                         System.out.println(picks);
                         System.out.println(winner);
                         in.readLine(); // catch "END" SIGNAL
@@ -137,6 +142,9 @@ public class Client {
                     System.out.println("=======================================");
 
                 } else {
+                    if (!isPlayer1) {
+                        in.readLine(); // catch "LOGOUT" 
+                    }
                     System.out.println("\nLogging out...");
                     break;
                 }
