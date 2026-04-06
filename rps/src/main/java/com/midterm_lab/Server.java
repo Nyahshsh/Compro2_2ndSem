@@ -7,6 +7,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.midterm_lab.model.GameSession;
+import com.midterm_lab.model.Player;
+import com.midterm_lab.service.GameService;
+import com.midterm_lab.service.UserService;
+
 public class Server {
     public static void main(String[] args) {
         int port = 7777;
