@@ -1,4 +1,4 @@
-package com.rps.waraferek;
+package com.midterm_lab;
 
 import java.io.BufferedReader;
 import java.io.IOException;
