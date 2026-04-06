@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         String server = "localhost";
-        int port = 8888;
+        int port = 7777;
         try (Socket socket = new Socket(server, port);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -34,9 +34,8 @@ public class Client {
                 while (true) {
                     System.out.print("Choice: ");
                     choice = input.nextLine().trim();
-                    if (choice.equals("1") || choice.equals("2")) {
+                    if (choice.equals("1") || choice.equals("2"))
                         break;
-                    }
                     System.out.println("Invalid input! Please enter 1 or 2 only.");
                 }
                 out.println(choice);
@@ -53,101 +52,94 @@ public class Client {
                     break;
             }
 
-            String actionChoice = "";
+            // Main Game Loop
             while (true) {
-                if (isPlayer1) {
-                    in.readLine(); // Catch "MENU" signal
-                    System.out.println("""
+                String signal = in.readLine(); // "MENU"
+                if (signal == null || signal.equals("LOGOUT"))
+                    break;
 
+                String myChoice = "";
+                if (isPlayer1) {
+                    System.out.println("""
                             =======================================
-                                            MAIN MENU
+                                           MAIN MENU
                             =======================================
-                                        [1] Play Game
-                                        [2] Log out
+                                         [1] Play Game
+                                         [2] Log out
                             =======================================""");
-                    actionChoice = "";
                     while (true) {
                         System.out.print("Choice: ");
-                        actionChoice = input.nextLine().trim();
-                        if (actionChoice.equals("1") || actionChoice.equals("2")) {
+                        myChoice = input.nextLine().trim();
+                        if (myChoice.equals("1") || myChoice.equals("2"))
                             break;
-                        }
                         System.out.println("Invalid input! Please enter 1 or 2 only.");
                     }
-                    out.println(actionChoice);
-
+                    out.println(myChoice);
                 } else {
-                    in.readLine(); // Catch "MENU" signal
-                    String p2ready;
+                    System.out.println("Waiting for Player 1 to decide...");
+                    String p1Status = in.readLine(); // "P1_CHOICE:X"
+                    if (p1Status == null || p1Status.contains(":2")) {
+                        System.out.println("Opponent is logging out.");
+                        break;
+                    }
+                    System.out.println("\nPlayer 1 wants to play! [1] Accept [2] Logout");
                     while (true) {
-                        System.out.print("\nWaiting for Player 1... Type 'play' to start or 'quit' to leave: ");
-                        p2ready = input.nextLine().trim();
-                        if (p2ready.equalsIgnoreCase("play") || p2ready.equalsIgnoreCase("quit")) {
+                        System.out.print("Choice: ");
+                        myChoice = input.nextLine().trim();
+                        if (myChoice.equals("1") || myChoice.equals("2"))
                             break;
-                        }
-                        System.out.println("Invalid input! Please type 'play' or 'quit' only.");
+                        System.out.println("Invalid! Enter 1 to Accept or 2 to Logout.");
                     }
-                    out.println(p2ready);
-
-                    if (p2ready.equalsIgnoreCase("quit")) {
-                        actionChoice = "2";
-                    } else {
-                        String actionLine = in.readLine();
-                        if (actionLine != null && actionLine.contains(":")) {
-                            actionChoice = actionLine.split(":")[1].trim();
-                        } else {
-                            actionChoice = "1"; // play na?
-                        }
-                    }
+                    out.println(myChoice);
                 }
 
-                if ("1".equals(actionChoice)) {
-                    System.out.println("\n========================================");
-                    System.out.println("                " + in.readLine()); // "GAME STARTS NOW"
-                    System.out.println("              " + in.readLine()); // "p1 VS p2"
-                    System.out.println("========================================");
+                // If user chose logout, exit loop
+                if (myChoice.equals("2"))
+                    break;
 
-                    String roundHeader;
-                    while ((roundHeader = in.readLine()) != null && !roundHeader.equals("GAME_OVER")) {
-                        System.out.println("\n" + roundHeader); // "Round X/3"
-                        System.out.println("=========== CHOOSE YOUR PICK ===========");
-                        System.out.println("  [0] Rock   [1] Paper   [2] Scissors");
-
-                        String move;
-                        while (true) {
-                            System.out.print("Your move: ");
-                            move = input.nextLine().trim();
-                            if (move.equals("0") || move.equals("1") || move.equals("2"))
-                                break;
-                            System.out.println("Invalid input! Please enter 0, 1, or 2 only.");
-                        }
-                        out.println(move);
-
-                        String picks = in.readLine(); // "Player 1 picked Rock | Player 2 picked Paper"
-                        String winner = in.readLine(); // "Result: Player 2 wins this round"
-                        System.out.println(picks);
-                        System.out.println(winner);
-                        in.readLine(); // catch "END" SIGNAL
-                    }
-
-                    System.out.println("\nGAME OVER...");
-                    System.out.println(in.readLine()); // Overall winner
-
-                    // DISPLAY LEADERBOARD
-                    System.out.println("\n>>>>>>>>>>>>> LEADERBOARD <<<<<<<<<<<<<");
-                    String line;
-                    while ((line = in.readLine()) != null && !line.equals("END")) {
-                        System.out.println(line);
-                    }
-                    System.out.println("=======================================");
-
-                } else {
-                    if (!isPlayer1) {
-                        in.readLine(); // catch "LOGOUT" 
-                    }
-                    System.out.println("\nLogging out...");
+                // See if game starts or opponent declined
+                String serverResponse = in.readLine();
+                if (serverResponse == null || serverResponse.equals("OPPONENT_LEFT")) {
+                    System.out.println("The match was cancelled (Opponent declined).");
                     break;
                 }
+
+                System.out.println("\n========================================");
+                System.out.println("             " + serverResponse); // "GAME STARTS NOW"
+                System.out.println("            " + in.readLine()); // "p1 VS p2"
+                System.out.println("========================================");
+
+                String roundHeader;
+                // Game rounds loop
+                while ((roundHeader = in.readLine()) != null && !roundHeader.equals("GAME_OVER")) {
+                    System.out.println("\n" + roundHeader); // "Round X/10"
+                    System.out.println("=========== CHOOSE YOUR PICK ===========");
+                    System.out.println("  [0] Rock   [1] Paper   [2] Scissors");
+
+                    String move;
+                    while (true) {
+                        System.out.print("Your move: ");
+                        move = input.nextLine().trim();
+                        if (move.equals("0") || move.equals("1") || move.equals("2"))
+                            break;
+                        System.out.println("Invalid! Enter 0, 1, or 2.");
+                    }
+                    out.println(move);
+
+                    System.out.println(in.readLine()); // Picks result
+                    System.out.println(in.readLine()); // Round winner
+                }
+
+                System.out.println("\nGAME OVER...");
+                System.out.println(in.readLine()); // Overall winner
+
+                // Display Leaderboard (Win Rate Type)
+                System.out.println("\n------------ L E A D E R B O A R D ---------------");
+                String lbLine;
+                while ((lbLine = in.readLine()) != null && !lbLine.equals("LB_END")) {
+                    System.out.println(lbLine);
+                }
+                System.out.println("-------------------------------------------------");
             }
 
         } catch (Exception e) {

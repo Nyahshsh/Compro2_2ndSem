@@ -41,4 +41,9 @@ public class Player {
     public void incrementWins() {
         this.wins++;
     }
+
+    public void incrementGamesPlayed() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'incrementGamesPlayed'");
+    }
 }
