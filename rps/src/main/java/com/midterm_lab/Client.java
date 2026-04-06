@@ -129,7 +129,7 @@ public class Client {
                     System.out.println(in.readLine()); // Overall winner
 
                     // DISPLAY LEADERBOARD
-                    System.out.println("\n============= LEADERBOARD =============");
+                    System.out.println("\n>>>>>>>>>>>>> LEADERBOARD <<<<<<<<<<<<<");
                     String line;
                     while ((line = in.readLine()) != null && !line.equals("END")) {
                         System.out.println(line);
