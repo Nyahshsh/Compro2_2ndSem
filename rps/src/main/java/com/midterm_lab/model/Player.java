@@ -1,20 +1,20 @@
 package com.midterm_lab.model;
 
-//encapsulation
+// Encapsulation
 public class Player {
-    // private fields
-    private String username; // used for identification
-    private String password; // for security
-    private int wins; // wins every match
+    // Private Fields
+    private String username; // For identification
+    private String password; // For security
+    private int wins; // wins of every match
 
-    // constructor: called when loadeing from json or creating a new account
+    // Constructor: called when loading from json or creating a new account
     public Player(String username, String password, int wins) {
         this.username = username;
         this.password = password;
         this.wins = wins;
     }
 
-    // getters and setters
+    // Getters and Setters
     public String getUsername() {
         return username;
     }
@@ -43,7 +43,11 @@ public class Player {
     }
 
     public void incrementGamesPlayed() {
+        
+    }
+
+    public int GamesPlayed() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'incrementGamesPlayed'");
+        throw new UnsupportedOperationException("Unimplemented method 'GamesPlayed'");
     }
 }

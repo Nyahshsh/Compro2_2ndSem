@@ -7,7 +7,7 @@ public class Scissors extends GameMove {
         super("Scissors");  //super("Scissors") sets the private moveName field in GameMove.
     }
 
-    // demonstrates polymorphism
+    // demonstrates polymosphism
     // Override the abstract methods
     @Override
     public int compare(GameMove other) {

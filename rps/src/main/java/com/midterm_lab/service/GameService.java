@@ -1,10 +1,6 @@
 package com.midterm_lab.service;
 
-import com.midterm_lab.model.GameMove;
-import com.midterm_lab.model.Paper;
-import com.midterm_lab.model.Player;
-import com.midterm_lab.model.Rock;
-import com.midterm_lab.model.Scissors;
+import com.midterm_lab.model.*;
 
 public class GameService {
     

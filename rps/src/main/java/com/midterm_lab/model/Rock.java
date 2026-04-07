@@ -1,10 +1,10 @@
 package com.midterm_lab.model;
 
-//inheritance
+// Inheritance
 public class Rock extends GameMove {
 
-    //constructor
-    public Rock(){ // it calls the parent constructor with move name "Rock"
+    // Constructor
+    public Rock(){ // It calls the parent constructor with move name "Rock"
         super("Rock"); //super("Rock") sets the private moveName field in GameMove.
     }
 

@@ -1,14 +1,15 @@
 package com.midterm_lab.model;
 
-//inheritance
+// Inheritance
 public class Paper extends GameMove {
 
-    // constructor
-    public Paper() { // it calls the parent constructor with move name "Paper"
-        super("Paper"); // super("Paper") sets the private moveName field in GameMove.
+    // Constructor
+    public Paper() { 
+        super("Paper"); 
     }
-
-    // demonstrates polymorphism
+    
+    // super("Paper") sets the private moveName field in GameMove.
+    // Demonstrates Polymorphism
     // Override the abstract method
     @Override
     public int compare(GameMove other) {

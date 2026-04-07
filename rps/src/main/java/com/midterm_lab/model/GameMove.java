@@ -1,18 +1,20 @@
 package com.midterm_lab.model;
 
 public abstract class GameMove {
-    //encapsulation
+
+    // Encapsulation
     private String moveName;
 
-    //constructor: when a subclass is created (Rock, Paper, Scissors)
+    // Constructor for the subclasses(Rock, Paper, Scissors)
     public GameMove(String moveName) {
         this.moveName = moveName;
     }
 
-    //getter for moveName - to read moves name from outside
+    // Getter for moveName
     public String getMoveName() {
         return moveName;
     }
-    //abstract methods
+
+    // Abstract Method
     public abstract int compare(GameMove other); 
 }

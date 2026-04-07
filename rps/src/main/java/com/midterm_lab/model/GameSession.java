@@ -1,9 +1,10 @@
 package com.midterm_lab.model;
 
-// encapsulation
-// manages the round match logic between two players
+// Encapsulation
+// Handles the Logic w/ the Players
 public class GameSession {
-    // private fields: two players in the session
+
+    // Private Fields
     private Player p1;
     private Player p2;
     private int p1Score;
@@ -11,7 +12,7 @@ public class GameSession {
     private GameMove p1move;
     private GameMove p2move;
 
-    // constructor
+    // Constructor
     public GameSession(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
@@ -19,7 +20,7 @@ public class GameSession {
         this.p2Score = 0;
     }
 
-    // getters and setters
+    // Getters and Setters
     public Player getP1() {
         return p1;
     }
@@ -52,28 +53,28 @@ public class GameSession {
         this.p2move = move;
     }
 
-    // determine the winner every round, this is the logic of the game
+    // Will determine the winner every round (Logic of Game)
     public String playRound() {
-    String moveDetails = p1.getUsername() + " picked " + p1move.getMoveName() + " | " +
-                         p2.getUsername() + " picked " + p2move.getMoveName() + "\n";
+        String moveDetails = p1.getUsername() + " picked " + p1move.getMoveName() + " | " +
+                p2.getUsername() + " picked " + p2move.getMoveName() + "\n";
 
-    int roundResult = p1move.compare(p2move);
-    switch (roundResult) {
-        case 0 -> {
-            return moveDetails + "Result: Draw";
-        }
-        case 1 -> {
-            p1Score++;
-            return moveDetails + "Result: " + p1.getUsername() + " wins this round";
-        }
-        default -> {
-            p2Score++;
-            return moveDetails + "Result: " + p2.getUsername() + " wins this round";
+        int roundResult = p1move.compare(p2move);
+        switch (roundResult) {
+            case 0 -> {
+                return moveDetails + "Result: Draw";
+            }
+            case 1 -> {
+                p1Score++;
+                return moveDetails + "Result: " + p1.getUsername() + " wins this round";
+            }
+            default -> {
+                p2Score++;
+                return moveDetails + "Result: " + p2.getUsername() + " wins this round";
+            }
         }
     }
-}
 
-    // determine the winner aftr 3 rounds
+    // Will determine the winner after 3 rounds
     public String determineOverallWinner() {
         if (p1Score > p2Score) {
             p1.incrementWins();
