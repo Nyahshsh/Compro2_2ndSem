@@ -2,11 +2,13 @@
   {
     "username": "Nyah",
     "password": "1111",
-    "wins": 0
+    "wins": 0,
+    "gamesPlayed": 0
   },
   {
     "username": "mawi",
     "password": "6969",
-    "wins": 0
+    "wins": 0,
+    "gamesPlayed": 0
   }
 ]

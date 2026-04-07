@@ -14,10 +14,10 @@ public class Paper extends GameMove {
     @Override
     public int compare(GameMove other) {
         if (other instanceof Rock)
-            return 1; // Paper beats rock
+            return 1;
         if (other instanceof Scissors)
-            return -1; // Scissors beats Paper 
-        return 0; // Paper vs paper [tie]
+            return -1; 
+        return 0; 
     }
 
 }

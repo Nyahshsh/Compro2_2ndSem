@@ -1,13 +1,14 @@
 package com.midterm_lab.model;
 
-//inheritance
+// Inheritance
 public class Scissors extends GameMove {
-    // constructor
-    public Scissors() { // it calls the parent constructor with move name "Scissors"
-        super("Scissors");  //super("Scissors") sets the private moveName field in GameMove.
+
+    public Scissors() {
+        super("Scissors");  
     }
 
-    // demonstrates polymosphism
+    //super("Scissors") sets the private moveName field in GameMove.
+    // demonstrates polymorphism
     // Override the abstract methods
     @Override
     public int compare(GameMove other) {
